@@ -42,7 +42,9 @@ app.use("/api/v1/message", messageRoute);
 const PORT = process.env.PORT || 3000
 
 
-server.listen(PORT, async () => {
-    await connectDB();
-    console.log(`server is running at port ${PORT}`)
-})
+// server.listen(PORT, async () => {
+//     await connectDB();
+//     // console.log(`server is running at port ${PORT}`)
+// })
+
+module.exports = app;
