@@ -47,4 +47,4 @@ const PORT = process.env.PORT || 3000
 //     // console.log(`server is running at port ${PORT}`)
 // })
 
-export default app;
+export default server;
