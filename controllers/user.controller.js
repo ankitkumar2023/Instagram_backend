@@ -157,10 +157,17 @@ const userLoginVerification = async (req,res) => {
 
 const userLogout = async (req,res) => {
     try {
-        return res.cookie("accessToken", "", { maxAge: 0 }).json({
+        return res
+          .cookie("accessToken", "", {
+            maxAge: 0,
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+          })
+          .json({
             message: "logged out successfully",
-            success:true
-        })
+            success: true,
+          });
     } catch (error) {
         console.log("error while logging out", error);
         return res.status(501).json({
