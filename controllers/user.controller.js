@@ -103,11 +103,10 @@ const userLoginVerification = async (req,res) => {
             , process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: process.env.ACCESS_TOKEN_EXPIREY_KEY });
 
         
-        const options = {
-            httpOnly: true,
-            sameSite: "strict",
-            maxAge: 1 * 24 * 60 * 60 * 1000
-        }
+           
+            
+           
+            
         
         //we want as soon as user logged in all the post the user posted get fetched
         const userAllPosts = await Promise.all(
@@ -133,6 +132,14 @@ const userLoginVerification = async (req,res) => {
             
             
         }
+
+        const options = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",  // Enable secure cookies only in production
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", 
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+        };
+        
         return res.cookie("accessToken", accessToken, options).json({
             message: `Welcome back ${user.username}`,
             success:true,
